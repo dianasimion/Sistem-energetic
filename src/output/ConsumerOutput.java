@@ -22,9 +22,9 @@ public class ConsumerOutput {
 
     /**
      * constructor pentru consumator in formatul de output
-     * @param id
-     * @param isBankrupt
-     * @param budget
+     * @param id id-ul
+     * @param isBankrupt starea actuala
+     * @param budget bugetul
      */
     public ConsumerOutput(final int id, final boolean isBankrupt, final int budget) {
         this.id = id;

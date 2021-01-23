@@ -46,10 +46,6 @@ public final class Main {
             simulation.runTurn(input, i);
         }
 
-//        for (int i = 0; i < 2; i++) {
-//            simulation.runTurn(input, i);
-//        }
-
         simulation.leftInSimulation();
 
         output.createOutput();

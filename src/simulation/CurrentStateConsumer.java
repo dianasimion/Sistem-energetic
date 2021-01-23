@@ -98,7 +98,7 @@ public class CurrentStateConsumer {
     /**
      * consumatorul plateste valoarea contractului actual catre distributor,
      * iar aceste primeste banii
-     * @param currentDistributorId
+     * @param currentDistributorId idul
      */
     public final void payContract(final int currentDistributorId) {
         this.budget -= this.contract.getPrice();
@@ -108,8 +108,7 @@ public class CurrentStateConsumer {
     }
 
     /**
-     * suma pe care consumatorul restant o datoreaza distributorului
-     * @return
+     * @return suma pe care consumatorul restant o datoreaza distributorului
      */
     public final int computeRestantAndCurrentContract() {
         // suma contractului neplatit plus penalitatile se adauga la pretul contractului actual
@@ -134,8 +133,7 @@ public class CurrentStateConsumer {
      */
     public final void payRestantAndCurrentContract() {
         this.budget -= computeRestantAndCurrentContract();
-//        Simulation.getInstance().getDistributorsMap().get(currentDistributorId).
-//                acceptMoney(this.contract.getPrice());
+
         Simulation.getInstance().getDistributorsMap().get(currentDistributorId).
                 acceptMoney(computeRestantAndCurrentContract());
     }

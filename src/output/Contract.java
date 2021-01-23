@@ -31,9 +31,9 @@ public class Contract {
 
     /**
      * constructor pentru contract
-     * @param consumerId
-     * @param price
-     * @param remainedContractMonths
+     * @param consumerId idul
+     * @param price pretul contractului
+     * @param remainedContractMonths numarul de luni ramase
      */
     public Contract(final int consumerId, final int price, final int remainedContractMonths) {
         this.consumerId = consumerId;
@@ -43,7 +43,7 @@ public class Contract {
 
     /**
      * constructor care copiaza cel mai bun contract
-     * @param contract
+     * @param contract se creeaza oe baza contractului dat ca parametru
      */
     public Contract(final Contract contract) {
         this.consumerId = contract.getConsumerId();

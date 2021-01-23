@@ -400,9 +400,9 @@ public class Simulation {
      * se executa actiunile specifice primei runde
      */
     public final void runFirstTurn() {
+        // toti distribuitorii isi aleg producatorii pe baza strategiilor
         currentDistributors.forEach(CurrentStateDistributor::chooseProducersByStrategy);
 
-        // toti isi aleg listele de producatori
         modifyProductionCost(currentDistributors);
         //currentDistributors.forEach(CurrentStateDistributor::changeProductionCost);
 
@@ -426,8 +426,6 @@ public class Simulation {
      * @param i         luna curenta
      */
     public final void runTurn(final Input input, final int i) {
-        //addProducers(input);
-        // start etapa 1
         updatedProducers = new ArrayList<>();
         distributorsWithUpdatedProducers = new ArrayList<>();
 
@@ -576,7 +574,6 @@ public class Simulation {
                         prodList.add(producer);
                         distributor.setProducers(prodList);
 
-                        //producer.setNumberOfDistributors(producer.getNumberOfDistributors() + 1);
                     }
                 }
             }

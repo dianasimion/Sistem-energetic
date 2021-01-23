@@ -14,7 +14,7 @@ public final class StrategyFactory {
 
     /**
      * returneaza instanta curenta pentru Singleton
-     * @return
+     * @return factory
      */
     public static StrategyFactory getInstance() {
         if (factory == null) {
@@ -36,8 +36,8 @@ public final class StrategyFactory {
 
     /**
      * creaza o noua strategie pe baza tipului
-     * @param type
-     * @return
+     * @param type erergyTypeStrategy
+     * @return factory
      */
     public Strategy createStrategy(EnergyChoiceStrategyType type) {
         Strategy strategy = null;

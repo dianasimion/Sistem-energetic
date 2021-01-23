@@ -8,13 +8,11 @@ import java.util.List;
  */
 public class MonthlyUpdate {
     private final List<Consumer> newConsumers;
-    //private final List<CostsChange> costsChanges;
     private final List<DistributorChange> distributorChanges;
     private final List<ProducerChange> producerChanges;
 
     public MonthlyUpdate() {
         newConsumers = new ArrayList<>();
-        //costsChanges = new ArrayList<>();
         distributorChanges = new ArrayList<>();
         producerChanges = new ArrayList<>();
     }
@@ -22,10 +20,6 @@ public class MonthlyUpdate {
     public final List<Consumer> getNewConsumers() {
         return newConsumers;
     }
-    //public final List<CostsChange> getCostsChanges() {
-//        return costsChanges;
-//    }
-
 
     public final List<DistributorChange> getDistributorChanges() {
         return distributorChanges;

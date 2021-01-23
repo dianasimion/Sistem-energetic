@@ -8,8 +8,8 @@ import java.util.List;
 public class PriceStrategy implements Strategy {
     /**
      * returneaza lista de producatori corespunzatoare strategiei
-     * @param producers
-     * @return
+     * @param producers lista de producatori disponibili
+     * @return lista de producatori in ordinea descisa de strategie
      */
     @Override
     public List<CurrentStateProducer> getProducers(List<CurrentStateProducer> producers) {

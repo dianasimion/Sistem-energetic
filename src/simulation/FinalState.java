@@ -13,6 +13,7 @@ import java.util.TreeMap;
  * fie dupa ce dau faliment, fie dupa ce se termina simularea curenta
  */
 public final class FinalState {
+
     // am folosit TreeMap pentru a pastra entitatile ordonate in ordinea id-urilor
     private TreeMap<Integer, CurrentStateConsumer> finalConsumersMap = new TreeMap<>();
     private TreeMap<Integer, CurrentStateDistributor> finalDistributorsMap = new TreeMap<>();

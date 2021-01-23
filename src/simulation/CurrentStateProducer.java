@@ -105,8 +105,7 @@ public class CurrentStateProducer extends Observable {
     }
 
     /**
-     * spune daca un distribuitor are un producator care a facut modificari
-     * @return
+     * @return spune daca un distribuitor are un producator care a facut modificari
      */
     public final boolean producerHasRenewable() {
         return this.getEnergyType().isRenewable();
@@ -130,6 +129,4 @@ public class CurrentStateProducer extends Observable {
         notifyObservers(false);
 //        System.out.println("off");
     }
-
-
 }

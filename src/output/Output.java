@@ -42,7 +42,6 @@ public class Output {
 
         for (Map.Entry<Integer, CurrentStateDistributor> entry
                 : FinalState.getInstance().getFinalDistributorsMap().entrySet()) {
-            Integer id = entry.getKey();
             CurrentStateDistributor distributor = entry.getValue();
 
             DistributorOutput distributorOutput = new DistributorOutput(distributor.getId(),
@@ -54,7 +53,6 @@ public class Output {
 
         for (Map.Entry<Integer, CurrentStateProducer> entry
                 : FinalState.getInstance().getFinalProducersMap().entrySet()) {
-            Integer id = entry.getKey();
             CurrentStateProducer producer = entry.getValue();
 
             ProducerOutput producerOutput = new ProducerOutput(producer.getId(),

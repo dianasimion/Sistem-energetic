@@ -142,8 +142,7 @@ public class CurrentStateDistributor implements Observer {
     }
 
     /**
-     * se calculeaza profitul pe care consumatorul il face in luna curenta
-     * @return
+     * @return suma pe care consumatorul restant o datoreaza distributorului
      */
     public final int computeProfit() {
         final double profitConsant = 0.2;
@@ -151,16 +150,14 @@ public class CurrentStateDistributor implements Observer {
     }
 
     /**
-     * se calculeaza pretul unui contract pentru un distribuitor fara clienti
-     * @return
+     * @return pretul unui contract pentru un distribuitor fara clienti
      */
     public final int computeContractNoClients() {
         return this.infrastructureCost + this.productionCost + this.computeProfit();
     }
 
     /**
-     * se calculeaza pretul unui contract pentru un distribuitor acre deja are clienti
-     * @return
+     * @return pretul unui contract pentru un distribuitor acre deja are clienti
      */
     public final int computeContract() {
         return (int) Math.round(Math.floor(this.infrastructureCost / this.contracts.size())
@@ -168,8 +165,7 @@ public class CurrentStateDistributor implements Observer {
     }
 
     /**
-     * se calculeaza costurile totale pentru un distribuitor in luna respectiva
-     * @return
+     * @return costurile totale pentru un distribuitor in luna respectiva
      */
     public final int computeTotalCosts() {
         return this.infrastructureCost + this.productionCost * this.contracts.size();
@@ -184,7 +180,7 @@ public class CurrentStateDistributor implements Observer {
 
     /**
      * distribuitorul incaseaza bani de la fiecare consumator
-     * @param price
+     * @param price pretul
      */
     public final void acceptMoney(final int price) {
         this.budget += price;
@@ -192,7 +188,7 @@ public class CurrentStateDistributor implements Observer {
 
     /**
      * se adauga un contract dat ca parametru la contractele actuale ale unui distribuitor
-     * @param contract
+     * @param contract contractul
      */
     public final void addContractToDistributor(final Contract contract) {
         this.contracts.add(contract);
@@ -200,8 +196,8 @@ public class CurrentStateDistributor implements Observer {
 
     /**
      * observatorii sunt notificati ca producatorul lor si a schimbat conditiile
-     * @param o
-     * @param arg
+     * @param o obiectul observabil
+     * @param arg parametrul cu care trebuie notificati observerii
      */
     @Override
     public void update(Observable o, Object arg) {
