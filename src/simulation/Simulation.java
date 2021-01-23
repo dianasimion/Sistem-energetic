@@ -403,10 +403,9 @@ public class Simulation {
         // toti distribuitorii isi aleg producatorii pe baza strategiilor
         currentDistributors.forEach(CurrentStateDistributor::chooseProducersByStrategy);
 
-        modifyProductionCost(currentDistributors);
-        //currentDistributors.forEach(CurrentStateDistributor::changeProductionCost);
+        // se recalculeaza costul de productie
+        currentDistributors.forEach(CurrentStateDistributor::changeProductionCost);
 
-        // start etapa 1
         Contract contract = bestContract();
 
         consumersStuff(contract);
@@ -416,8 +415,6 @@ public class Simulation {
         removeConsumers();
 
         removeDistributors();
-        // end etapa 1
-
     }
 
     /**
@@ -426,17 +423,12 @@ public class Simulation {
      * @param i         luna curenta
      */
     public final void runTurn(final Input input, final int i) {
+        // la fiecare runda producatorii care se modifica vor fi diferiti
         updatedProducers = new ArrayList<>();
         distributorsWithUpdatedProducers = new ArrayList<>();
 
         makeMonthlyUpdates(input, i);
 
-        //for (CurrentStateDistributor distributor : )
-        //currentDistributors.forEach(CurrentStateDistributor::changeProductionCost);
-        // foarte IMPORTANT SA NU EXISTE ACEASTA LINIE
-        //modifyProductionCost(currentDistributors);
-
-//etsapa1
         Contract contract = bestContract();
 
         removeEndedContracts();
@@ -448,53 +440,10 @@ public class Simulation {
         removeConsumers();
 
         removeDistributors();
-        //end etapa 1
 
-        // etapa 2 :
-        //TODO NOTIFICARE OBSERVERI PENTRU PRODUCATORII UPDATATI
-        for (CurrentStateProducer producer : updatedProducers) {
-            producer.notifyDistributors();
-        }
+        notificationProcess();
 
-        for (CurrentStateProducer producer : updatedProducers) {
-            for (CurrentStateDistributor distributor : producer.getAllDistributors()) {
-                distributorsWithUpdatedProducers.add(distributor);
-            }
-        }
-
-        // todo astia isi aleg iar stategia daca e cazul
-//        producerChoiceByStrategy(distributorsWithUpdatedProducers);
-//        modifyProductionCost(distributorsWithUpdatedProducers);
-
-        for (CurrentStateDistributor distributor : distributorsWithUpdatedProducers) {
-
-            for (CurrentStateProducer producer : distributor.getProducers()) {
-                producer.getAllDistributors().remove(distributor);
-
-                producer.deleteObserver(distributor);
-            }
-
-            //distributor.setHasToUpdateProducers(false);
-            //producerChoiceByStrategy(distributor);
-            distributor.chooseProducersByStrategy();
-//
-//            List<CurrentStateDistributor> list = new ArrayList<>();
-//            list.add(distributor);
-//            modifyProductionCost(list);
-            //distributor.changeProductionCost();
-        }
-
-        modifyProductionCost(distributorsWithUpdatedProducers);
-        //distributorsWithUpdatedProducers.forEach(CurrentStateDistributor::changeProductionCost);
-
-
-        for (CurrentStateDistributor distributor : distributorsWithUpdatedProducers) {
-            distributor.setHasToUpdateProducers(false);
-        }
-
-        for (CurrentStateProducer producer : updatedProducers) {
-            producer.setUpdated(false);
-        }
+        reChoosingStrategies();
 
         createMonthlyStat(i + 1);
     }
@@ -542,45 +491,48 @@ public class Simulation {
     }
 
     /**
-     * modific costurile de productie ale distribuitorilor in functie de strategia aleasa
-     * @param distributorsToUpdate
+     * se actualizeaza campurile referitoare la producatorii cu modificari
      */
-    void modifyProductionCost(List<CurrentStateDistributor> distributorsToUpdate) {
-        for (CurrentStateDistributor distributor : distributorsToUpdate) {
-            double cost = 0;
-            long productionCost = 0;
-            int energy = 0;
+    public void notificationProcess() {
+        // distribuitorii producatorilor vor fi notificati
+        for (CurrentStateProducer producer : updatedProducers) {
+            producer.notifyDistributors();
+        }
 
-            if (distributor.getProducers() != null) {
-                for (CurrentStateProducer producer : distributor.getProducers()) {
-                    if (energy  < distributor.getEnergyNeededKW()) {
-                        energy += producer.getEnergyPerDistributor();
-                        cost += producer.getEnergyPerDistributor() * producer.getPriceKW();
+        // distributorii tin minte ca vor trebui sa aplice iar strategiile
+        for (CurrentStateProducer producer : updatedProducers) {
+            for (CurrentStateDistributor distributor : producer.getAllDistributors()) {
+                distributorsWithUpdatedProducers.add(distributor);
+            }
+        }
+    }
 
-                        producer.addObserver(distributor);
-                        // oare
-                        if (producer.getAllDistributors().contains(distributor)) {
-                            continue;
-                        }
+    /**
+     * daca este cazul, se vor realege strategiile pentru distribuitorii afectati
+     */
+    public void reChoosingStrategies() {
+        // se aleg iar strategiile
+        for (CurrentStateDistributor distributor : distributorsWithUpdatedProducers) {
 
-                        List<CurrentStateDistributor> list =
-                                new ArrayList<>(producer.getAllDistributors());
-                        list.add(distributor);
-                        producer.setAllDistributors(list);
+            for (CurrentStateProducer producer : distributor.getProducers()) {
+                // se elimina legatura dintre un distribuitor cu producator care face schimbari
+                // si toti producatorii acestuia
+                producer.getAllDistributors().remove(distributor);
 
-                        //distributor.getProducers().add(producer);
-                        List<CurrentStateProducer> prodList =
-                                new ArrayList<>(distributor.getProducers());
-                        prodList.add(producer);
-                        distributor.setProducers(prodList);
-
-                    }
-                }
+                producer.deleteObserver(distributor);
             }
 
-            final int number = 10;
-            productionCost = Math.round(Math.floor(cost / number));
-            distributor.setProductionCost((int) productionCost);
+            distributor.chooseProducersByStrategy();
+        }
+
+        distributorsWithUpdatedProducers.forEach(CurrentStateDistributor::changeProductionCost);
+
+        for (CurrentStateDistributor distributor : distributorsWithUpdatedProducers) {
+            distributor.setHasToUpdateProducers(false);
+        }
+
+        for (CurrentStateProducer producer : updatedProducers) {
+            producer.setUpdated(false);
         }
     }
 
