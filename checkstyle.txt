@@ -1,0 +1,10 @@
+Starting audit...
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\Main.java:64: Line is longer than 100 characters (found 259). [LineLength]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\simulation\CurrentStateConsumer.java:103:45: 'currentDistributorId' hides a field. [HiddenField]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\simulation\CurrentStateConsumer.java:119:23: 'contract' hides a field. [HiddenField]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\simulation\CurrentStateDistributor.java:122:65: '{' at column 65 should have line break after. [LeftCurly]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\simulation\Simulation.java:17:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\simulation\Simulation.java:109:13: '(' should be on the previous line. [MethodParamPad]
+[ERROR] D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\.\src\strategies\EnergyChoiceStrategyType.java:10:25: Variable 'label' must be private and have accessor methods. [VisibilityModifier]
+Audit done.
+Checkstyle ends with 7 errors.
