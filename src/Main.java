@@ -56,7 +56,5 @@ public final class Main {
         DistributorFactory.reset();
         FinalState.reset();
         Simulation.reset();
-
-//        "D:\facultate\an2\poo_proiect\proiect etapa 2\teme\teme\proiect-etapa2-energy-system\checker\resources\in\basic_12.json" "D:\\facultate\\an2\\poo_proiect\\proiect etapa 2\\teme\\teme\\proiect-etapa2-energy-system\checker\resources\outFiles\out.json"
     }
 }

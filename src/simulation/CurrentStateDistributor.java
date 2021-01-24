@@ -228,22 +228,22 @@ public class CurrentStateDistributor implements Observer {
                     cost += producer.getEnergyPerDistributor() * producer.getPriceKW();
 
                     producer.addObserver(this);
-                    // oare
+
                     if (producer.getAllDistributors().contains(this)) {
                         continue;
                     }
 
-                    List<CurrentStateDistributor> list =
-                            new ArrayList<>(producer.getAllDistributors());
-                    list.add(this);
-                    producer.setAllDistributors(list);
+                    if (producer.getAllDistributors().size() < producer.getMaxDistributors()) {
+                        List<CurrentStateDistributor> list =
+                                new ArrayList<>(producer.getAllDistributors());
+                        list.add(this);
+                        producer.setAllDistributors(list);
 
-                    //distributor.getProducers().add(producer);
-                    List<CurrentStateProducer> prodList =
-                            new ArrayList<>(this.getProducers());
-                    prodList.add(producer);
-                    this.setProducers(prodList);
-
+                        List<CurrentStateProducer> prodList =
+                                new ArrayList<>(this.getProducers());
+                        prodList.add(producer);
+                        this.setProducers(prodList);
+                    }
                 }
             }
         }

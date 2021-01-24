@@ -1,9 +1,8 @@
 Starting audit...
-[ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\Main.java:60: Line is longer than 100 characters (found 259). [LineLength]
 [ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\simulation\CurrentStateConsumer.java:103:45: 'currentDistributorId' hides a field. [HiddenField]
 [ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\simulation\CurrentStateConsumer.java:118:23: 'contract' hides a field. [HiddenField]
 [ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\simulation\CurrentStateDistributor.java:122:65: '{' at column 65 should have line break after. [LeftCurly]
 [ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\simulation\Simulation.java:112:13: '(' should be on the previous line. [MethodParamPad]
 [ERROR] D:\facultate\an2\poo_proiect\proiect_etapa2_github\Sistem-energetic\.\src\strategies\EnergyChoiceStrategyType.java:10:25: Variable 'label' must be private and have accessor methods. [VisibilityModifier]
 Audit done.
-Checkstyle ends with 6 errors.
+Checkstyle ends with 5 errors.
